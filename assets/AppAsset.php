@@ -7,7 +7,10 @@
 
 namespace app\assets;
 
+use rmrevin\yii\fontawesome\AssetBundle as FontAwesomeAsset;
+use yii\bootstrap4\BootstrapAsset;
 use yii\web\AssetBundle;
+use yii\web\YiiAsset;
 
 /**
  * Main application asset bundle.
@@ -17,15 +20,24 @@ use yii\web\AssetBundle;
  */
 class AppAsset extends AssetBundle
 {
-    public $basePath = '@webroot';
-    public $baseUrl = '@web';
-    public $css = [
-        'css/site.css',
-    ];
-    public $js = [
-    ];
+    /** @var string[] */
+    public $css = ['css/site.css'];
+    /** @var string[] */
+    public $js = [];
+    /** @var string[] */
     public $depends = [
-        'yii\web\YiiAsset',
-        'yii\bootstrap4\BootstrapAsset',
+        YiiAsset::class,
+        BootstrapAsset::class,
+        FontAwesomeAsset::class
     ];
+
+
+    /**
+     * {@inheritdoc}
+     */
+    public function init()
+    {
+        parent::init();
+        $this->sourcePath = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'assets';
+    }
 }
